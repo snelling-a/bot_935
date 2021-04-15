@@ -50,7 +50,7 @@ client.on('message', (message) => {
    * check if command is for dms
    */
   if (command.guildOnly && message.channel.type === 'dm') {
-    return message.reply("I can't execute that command inside DMs!");
+    return message.reply("i can't execute that command inside DMs!");
   }
 
   /**
@@ -59,9 +59,10 @@ client.on('message', (message) => {
   if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(command.permissions)) {
-      return message.reply('You can not do this!');
+      return message.reply('http://gph.is/1nFH9lL');
     }
   }
+
   /**
    * check for arguments
    */
