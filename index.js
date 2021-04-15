@@ -1,7 +1,19 @@
+const fs = require('fs');
 const Discord = require('discord.js');
-const client = new Discord.Client();
-require('dotenv').config();
 const { prefix } = require('./config.json');
+require('dotenv').config();
+
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs
+  .readdirSync('./commands')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
 
 client.once('ready', () => {
   console.log('ready!');
@@ -9,18 +21,18 @@ client.once('ready', () => {
 
 client.on('message', (message) => {
   // console.log(message.content);
-  if (message.content.startsWith(`${prefix}ping`)) {
-    message.channel.send('pong');
-  } else if (message.content.startsWith(`${prefix}beep`)) {
-    message.channel.send('boop');
-  } else if (message.content === `${prefix}server`) {
-    message.channel.send(
-      `this server's name is: ${message.guild.name}\ntotal members: ${message.guild.memberCount}`,
-    );
-  } else if (message.content === `${prefix}user-info`) {
-    message.channel.send(
-      `your username: ${message.author.username}\nyour id: ${message.author.id}`,
-    );
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift().toLocaleLowerCase();
+
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(message, args);
+  } catch (err) {
+    console.log(err);
+    message.reply('there was an error trying to execute that command');
   }
 });
 
