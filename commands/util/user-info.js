@@ -3,7 +3,9 @@ module.exports = {
   description: 'get user info',
   execute(message, args) {
     message.channel.send(
-      `your username: ${message.author.username}\nyour id: ${message.author.id}`,
+      `${message.author.displayAvatarURL(true)}\nyour username: ${
+        message.author.username
+      }\nyour id: ${message.author.id}`,
     );
   },
 };
