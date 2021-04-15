@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/snelling-a/bot_935#readme",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "eslint": "^7.24.0"
