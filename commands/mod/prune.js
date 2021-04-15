@@ -1,3 +1,7 @@
+/**
+ * this does not work and i don't know why
+ */
+
 module.exports = {
   name: 'prune',
   description: 'Prune up to 99 messages.',
