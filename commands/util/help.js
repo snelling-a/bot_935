@@ -14,6 +14,7 @@ module.exports = {
      */
     if (!args.length) {
       data.push("here's a list of all my commands:");
+
       data.push(commands.map((command) => command.name).join(', '));
       data.push(
         `\nyou can send \`${prefix}help [command name]\` to get info on a specific command!`,
@@ -59,9 +60,6 @@ module.exports = {
 
     data.push(`**cooldown:** ${command.cooldown || 3} second(s)`);
 
-    /**
-     * send help message
-     */
     message.channel.send(data, { split: true });
   },
 };
