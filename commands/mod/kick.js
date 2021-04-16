@@ -18,7 +18,7 @@ module.exports = {
     message.channel.send(`You wanted to kick: ${taggedUser.username}`);
 
     if (taggedUser) {
-      const theKicked = message.guild.members.cache.get(taggedUser);
+      const theKicked = message.guild.members.cache.get(taggedUser.id);
       theKicked.kick();
 
       message.channel.send(`${taggedUser.username} has been kicked`);
