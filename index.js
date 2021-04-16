@@ -1,9 +1,22 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix } = require('./config.json');
+const { prefix, token } = require('./config.json');
 require('dotenv').config();
 
 const client = new Discord.Client();
+
+const eventFiles = fs
+  .readdirSync('./events')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args, client));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args, client));
+  }
+}
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -19,10 +32,11 @@ for (const folder of commandFolders) {
     client.commands.set(command.name, command);
   }
 }
-
+/*
 client.once('ready', () => {
   console.log('ready!');
 });
+ */
 
 client.on('message', (message) => {
   /**
@@ -60,7 +74,15 @@ client.on('message', (message) => {
   if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(command.permissions)) {
-      return message.reply('http://gph.is/1nFH9lL');
+      // return message.reply('http://gph.is/1nFH9lL');
+
+      const newman = new Discord.MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('nice try')
+        .setImage('https://media.giphy.com/media/wSSooF0fJM97W/giphy.gif')
+        .setFooter('maybe next time')
+        .setTimestamp();
+      return message.reply(newman);
     }
   }
 
@@ -117,4 +139,4 @@ client.on('message', (message) => {
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN || token);
