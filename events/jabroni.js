@@ -15,12 +15,30 @@ module.exports = {
         );
         const data = await response.json();
         console.log(data.data);
-        const { images, url, title } = data.data;
+        const { images, title } = data.data;
 
         const jabroni = new Discord.MessageEmbed()
           .setTitle(title)
+          .addFields(
+            {
+              name: `•••`,
+              value: 'can you smell',
+              inline: true,
+            },
+            {
+              name: `•••`,
+              value: 'what the rock',
+              inline: true,
+            },
+            {
+              name: `•••`,
+              value: 'is cooking',
+              inline: true,
+            },
+          )
           .setColor('#fc9403')
-          .setImage(images.downsized_large.url);
+          .setImage(images.downsized_large.url)
+          .setTimestamp();
         console.log('can you smell what the rock is cooking?');
         await message.channel.send(jabroni);
       };
