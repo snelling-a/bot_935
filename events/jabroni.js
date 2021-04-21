@@ -5,16 +5,12 @@ const fetch = require('node-fetch');
 module.exports = {
   name: 'message',
   execute(message) {
-    if (
-      message.content.includes('jabroni') ||
-      message.content.includes('jabronis')
-    ) {
+    if (message.content.includes('jabroni') || message.content.includes('jabronis')) {
       const theRock = async () => {
         const response = await fetch(
           `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=peoples elbow`,
         );
         const data = await response.json();
-        console.log(data.data);
         const { images, title } = data.data;
 
         const jabroni = new Discord.MessageEmbed()

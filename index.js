@@ -5,9 +5,7 @@ require('dotenv').config();
 
 const client = new Discord.Client();
 
-const eventFiles = fs
-  .readdirSync('./events')
-  .filter((file) => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./events').filter((file) => file.endsWith('.js'));
 
 for (const file of eventFiles) {
   const event = require(`./events/${file}`);
@@ -24,9 +22,7 @@ client.cooldowns = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
 
 for (const folder of commandFolders) {
-  const commandFiles = fs
-    .readdirSync(`./commands/${folder}`)
-    .filter((file) => file.endsWith('.js'));
+  const commandFiles = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
     const command = require(`./commands/${folder}/${file}`);
     client.commands.set(command.name, command);
@@ -51,10 +47,7 @@ client.on('message', (message) => {
   const commandName = args.shift().toLocaleLowerCase();
 
   const command =
-    client.commands.get(commandName) ||
-    client.commands.find(
-      (cmd) => cmd.aliases && cmd.aliases.includes(commandName),
-    );
+    client.commands.get(commandName) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
   /**
    * check if command is valid
@@ -118,9 +111,7 @@ client.on('message', (message) => {
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(
-        `please wait ${timeLeft.toFixed(
-          1,
-        )} more second(s) before reusing the \`${command.name}\` command.`,
+        `please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`,
       );
     }
   }

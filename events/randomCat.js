@@ -1,18 +1,20 @@
+const Discord = require('discord.js');
 const fetch = require('node-fetch');
 
 module.exports = {
-  name: 'cat',
+  name: 'message',
   execute(message) {
-    console.log(
-      `cat ${message.author.tag} in #${message.channel.name} sent: ${message.content}`,
-    );
-    // if (message.content.includes('cat')) {
-    //   const cat = async () => {
-    //     const { file } = await fetch('https://aws.random.cat/meow');
-    //     const data = await file.json();
-    //     console.log(data);
-    //   };
-    //   message.channel.send(cat);
-    // }
+    let regex = new RegExp(' cat(?:s.|s|[ .])?|cat(?:s[ !?]|[ !?])');
+    if (regex.test(message.content)) {
+      console.log('🐱');
+      const cat = async () => {
+        const response = await fetch('https://aws.random.cat/meow');
+        const data = await response.json();
+        console.log('file: randomCat.js  line 13  cat   data', data);
+        const randomCat = new Discord.MessageEmbed().setColor('#EEEEE9').setImage(data.file);
+        await message.channel.send(randomCat);
+      };
+      cat();
+    }
   },
 };
