@@ -2,8 +2,8 @@
 
 ## dev
 
-- [] `cp env.example .env`
+[] `cp env.example .env`
 
-  [] add discord token/giphy api key
+[] add discord token/api keys
 
-- [] `npm run dev` or `npx nodemon index.js` to run watch
+[] `npm run dev` or `npx nodemon index.js` to run watch
