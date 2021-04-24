@@ -10,7 +10,7 @@ module.exports = {
     /**
      * check for correct channel
      */
-    if (!message.channel.name.includes('movies')) {
+    if (!message.channel.name.includes('tests')) {
       console.log('wrong channel');
       message.channel.send('this command only works in the "movies" channel');
       return;
@@ -20,7 +20,7 @@ module.exports = {
      * check command input
      */
     if (!args.length) {
-      message.channel.send('please tell me a movie to search for\nusage: !movie [movie name]');
+      message.channel.send('please tell me a movie to search for\n**usage**: !movie [movie name]');
     }
 
     /**
@@ -36,9 +36,6 @@ module.exports = {
       const { original_title, overview, backdrop_path, release_date } = data.results[0];
       const movie = new Discord.MessageEmbed()
         .setTitle(original_title)
-        /**
-         * format date
-         */
         .addField('released:', release_date)
         .setDescription(overview)
         .setColor('#042941')

@@ -1,7 +1,3 @@
-/**
- * this does not work and it makes me mad
- */
-
 module.exports = {
   name: 'kick',
   description: 'Tag a member and kick them.',
