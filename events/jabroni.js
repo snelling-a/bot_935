@@ -5,10 +5,10 @@ const fetch = require('node-fetch');
 module.exports = {
   name: 'message',
   execute(message) {
-    if (message.content.includes('jabroni') || message.content.includes('jabronis')) {
+    if (message.content.toLowerCase().includes('jabroni') || message.content.toLowerCase().includes('jabronis')) {
       const theRock = async () => {
         const response = await fetch(
-          `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=peoples elbow`,
+          `https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=peoples%20elbow`,
         );
         const data = await response.json();
         const { images, title } = data.data;
