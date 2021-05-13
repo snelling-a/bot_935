@@ -10,7 +10,7 @@ module.exports = {
     /**
      * check for correct channel
      */
-    if (!message.channel.name.includes('tests')) {
+    if (!message.channel.name.includes('movies')) {
       console.log('wrong channel');
       message.channel.send('this command only works in the "movies" channel');
       return;
