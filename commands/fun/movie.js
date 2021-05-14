@@ -32,7 +32,6 @@ module.exports = {
     const movie = async () => {
       const response = await fetch(url);
       const data = await response.json();
-      console.log('file: movie.js  line 35  movie  data', data.results[0]);
       const { original_title, overview, backdrop_path, release_date } = data.results[0];
       const movie = new Discord.MessageEmbed()
         .setTitle(original_title)
