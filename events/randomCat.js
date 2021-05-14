@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 module.exports = {
   name: 'message',
   execute(message) {
-    let regex = new RegExp(' cat(?:s.|s|[ .])?|cat(?:s[ !?]|[ !?])');
+    let regex = new RegExp('/(\s?)cats{0,1}\b/gmi');
     if (regex.test(message.content)) {
       console.log('🐱');
       const cat = async () => {
